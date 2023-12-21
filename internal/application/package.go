@@ -57,6 +57,15 @@ func NewPackage(cfg *config.ZouniConfig, fset *token.FileSet, bpkg *build.Packag
 	return &pkg, nil
 }
 
+func (pkg *Package) Decls() []ast.Decl {
+	decls := []ast.Decl{}
+	for _, file := range pkg.files {
+		decls = append(decls, file.Decls...)
+	}
+
+	return decls
+}
+
 func (pkg *Package) String() string {
 	return pkg.IndentedString(0)
 }
