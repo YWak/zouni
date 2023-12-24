@@ -7,3 +7,7 @@ type Number interface {
 func Add[V Number](a, b V) V {
 	return a + b
 }
+
+func Sub[V Number](a, b V) V {
+	return a - b
+}

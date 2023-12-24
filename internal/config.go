@@ -1,4 +1,4 @@
-package config
+package internal
 
 import (
 	"encoding/json"
@@ -7,47 +7,30 @@ import (
 	"path/filepath"
 )
 
-type Logger interface {
-	Printf(fmt string, v ...any)
-	Println(v ...any)
-}
-
-type NopLogger struct{}
-
-func (log *NopLogger) Printf(fmt string, v ...any) {
-	// NOP
-}
-
-func (log *NopLogger) Println(v ...any) {
-	// NOP
-}
-
-var _ Logger = &NopLogger{}
-
 type ZouniConfig struct {
 	Excludes []string `json:"excludes"`
 	Debug    bool     `json:"debug"`
-	log      Logger
 }
 
-// NewZouniConfigはコンフィグを返します。
-func NewZouniConfig(targetFile string) (*ZouniConfig, error) {
-	cfg := ZouniConfig{
-		Excludes: []string{},
-		Debug:    false,
-	}
+var Config *ZouniConfig = &ZouniConfig{}
 
-	err := cfg.Load(targetFile)
+func (cfg *ZouniConfig) Load(dir string) error {
+	// set default value
+	cfg.Excludes = []string{}
+	cfg.Debug = false
+
+	err := cfg.load(dir)
 	if err != nil {
-		return nil, err
-	}
-	if cfg.Debug {
-		cfg.log = log.Default()
-	} else {
-		cfg.log = &NopLogger{}
+		return err
 	}
 
-	return &cfg, nil
+	if cfg.Debug {
+		Log = log.Default()
+	} else {
+		Log = &NopLogger{}
+	}
+
+	return nil
 }
 
 func exists(dirName string) bool {
@@ -56,13 +39,13 @@ func exists(dirName string) bool {
 }
 
 // Loadは設定情報を読み込みます。
-func (cfg *ZouniConfig) Load(targetFile string) error {
-	abspath, err := filepath.Abs(targetFile)
+func (cfg *ZouniConfig) load(directory string) error {
+	abspath, err := filepath.Abs(directory)
 	if err != nil {
 		return err
 	}
 
-	for dir := filepath.Dir(abspath); dir != "/"; dir = filepath.Dir(dir) {
+	for dir := abspath; dir != "/"; dir = filepath.Dir(dir) {
 		if !exists(dir) {
 			break
 		}
@@ -93,8 +76,4 @@ func (cfg *ZouniConfig) loadFrom(file string) error {
 	}
 
 	return nil
-}
-
-func (cfg *ZouniConfig) Logger() Logger {
-	return cfg.log
 }

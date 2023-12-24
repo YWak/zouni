@@ -5,29 +5,19 @@ import (
 	"fmt"
 	"go/ast"
 	"go/token"
-	"reflect"
 	"testing"
-	"unsafe"
 )
 
-type logger struct {
-	t *testing.T
+type TestLogger struct {
+	T *testing.T
 }
 
-func (l *logger) Printf(fmt string, v ...any) {
-	l.t.Logf(fmt, v...)
+func (l *TestLogger) Printf(fmt string, v ...any) {
+	l.T.Logf(fmt, v...)
 }
 
-func (l *logger) Println(v ...any) {
-	l.t.Log(v...)
-}
-
-func SetLogger(cfg interface{}, t *testing.T) {
-	logger := &logger{t: t}
-	pcfgType := reflect.ValueOf(cfg)
-	field := pcfgType.Elem().FieldByName("log")
-	field = reflect.NewAt(field.Type(), unsafe.Pointer(field.UnsafeAddr())).Elem()
-	field.Set(reflect.ValueOf(logger))
+func (l *TestLogger) Println(v ...any) {
+	l.T.Log(v...)
 }
 
 func DescribeDecl(fset *token.FileSet, decl ast.Decl) string {
@@ -67,5 +57,12 @@ func describeSpec(fset *token.FileSet, spec ast.Spec) string {
 
 	buf := bytes.NewBuffer(make([]byte, 1024))
 	ast.Fprint(buf, fset, spec, nil)
+	return buf.String()
+}
+
+func DescribeNode(fset *token.FileSet, node ast.Node) string {
+	buf := bytes.NewBuffer(make([]byte, 1024))
+	ast.Fprint(buf, fset, node, nil)
+
 	return buf.String()
 }

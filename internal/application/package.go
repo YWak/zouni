@@ -5,26 +5,28 @@ import (
 	"fmt"
 	"go/ast"
 	"go/build"
-	"go/parser"
 	"go/token"
-	"os"
-	"path/filepath"
 	"strings"
 
-	"github.com/ywak/zouni/internal/config"
+	"github.com/ywak/zouni/internal"
 )
 
 type Package struct {
-	cfg   *config.ZouniConfig
-	bpkg  *build.Package
-	files map[string]*ast.File
+	// このパッケージに対応するパッケージ
+	bpkg *build.Package
+
+	// このパッケージに含まれるファイルのパスとファイルをあらわす構造体の対応
+	files []*File
+
+	// このパッケージに含まれるtoken.Fileとast.Fileの対応
+	f2f map[*token.File]*ast.File
 }
 
-func NewPackage(cfg *config.ZouniConfig, fset *token.FileSet, bpkg *build.Package) (*Package, error) {
+// パッケージを作成します。
+func CreatePackage(fset *token.FileSet, bpkg *build.Package) (*Package, error) {
 	pkg := Package{
-		cfg:   cfg,
-		bpkg:  bpkg,
-		files: map[string]*ast.File{},
+		bpkg: bpkg,
+		f2f:  map[*token.File]*ast.File{},
 	}
 
 	files := []string{}
@@ -32,26 +34,11 @@ func NewPackage(cfg *config.ZouniConfig, fset *token.FileSet, bpkg *build.Packag
 	files = append(files, bpkg.CgoFiles...)
 
 	for _, f := range files {
-		var fname string
-		if bpkg.Name == "main" {
-			fname = f
-		} else {
-			fname = filepath.Join(bpkg.ImportPath, f)
+		file := NewFile(&pkg, f)
+		if err := file.Parse(fset); err != nil {
+			return nil, err
 		}
-
-		path := filepath.Join(bpkg.Dir, f)
-		if _, ex := pkg.files[path]; !ex {
-			buf, err := os.ReadFile(path)
-			if err != nil {
-				return nil, err
-			}
-			astFile, err := parser.ParseFile(fset, fname, buf, parser.ParseComments)
-			if err != nil {
-				return nil, err
-			}
-			pkg.files[path] = astFile
-			cfg.Logger().Printf("parsed %s", path)
-		}
+		pkg.files = append(pkg.files, file)
 	}
 
 	return &pkg, nil
@@ -60,7 +47,7 @@ func NewPackage(cfg *config.ZouniConfig, fset *token.FileSet, bpkg *build.Packag
 func (pkg *Package) Decls() []ast.Decl {
 	decls := []ast.Decl{}
 	for _, file := range pkg.files {
-		decls = append(decls, file.Decls...)
+		decls = append(decls, file.Decls()...)
 	}
 
 	return decls
@@ -76,14 +63,26 @@ func (pkg *Package) IndentedString(indentSize int) string {
 	buf := bytes.NewBuffer(make([]byte, 1024*1024))
 	fmt.Fprintf(buf, "%sPackage {\n", indent)
 	fmt.Fprintf(buf, "%s  bpkg: '%s',\n", indent, pkg.bpkg.Name)
-	fmt.Fprintf(buf, "%s  files: {\n", indent)
-	for name, file := range pkg.files {
-		fmt.Fprintf(buf, "%s    '%s': '%s',\n", indent, name, file.Name)
+	fmt.Fprintf(buf, "%s  files: [\n", indent)
+	for _, file := range pkg.files {
+		fmt.Fprintf(buf, "%s    '%s',\n", indent, file.Name())
 	}
 	fmt.Fprintf(buf, "%s  }\n", indent)
 	fmt.Fprintf(buf, "%s}", indent)
 
 	return buf.String()
+}
+
+func (pkg *Package) FindFunctionByName(functionName string) *ast.FuncDecl {
+	for _, decl := range pkg.Decls() {
+		if fun, ok := decl.(*ast.FuncDecl); ok && fun.Name.Name == functionName {
+			internal.Log.Printf("decl %v is found for '%s'", fun, functionName)
+			return fun
+		}
+	}
+
+	internal.Log.Printf("package is not found for '%s' in %v", functionName, pkg.Decls())
+	return nil
 }
 
 var _ fmt.Stringer = &Package{}

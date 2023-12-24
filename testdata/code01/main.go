@@ -2,6 +2,10 @@ package main
 
 import "example.com/lib"
 
+func indirect(v int) int {
+	return v
+}
+
 func main() {
-	print(lib.Add(1, 2))
+	print(indirect(lib.Add(1, 2)))
 }
