@@ -138,6 +138,10 @@ func (app *Application) loadDecls() error {
 	return nil
 }
 
+func (app *Application) Decls() []ast.Decl {
+	return app.decls
+}
+
 // init関数およびmain関数を起点として、必要な宣言を登場順に返します。
 func (app *Application) Dig() ([]ast.Decl, error) {
 	// 宣言の登場順
@@ -198,10 +202,26 @@ func (app *Application) Dig() ([]ast.Decl, error) {
 // 関数呼び出しで呼び出されている関数の定義を返します。
 func (app *Application) findFuncDecl(node *ast.CallExpr) *ast.FuncDecl {
 	// app.logf("type = %v", internal.DescribeNode(app.fset, node))
+	logident := func(id *ast.Ident) {
+		if id.Obj != nil {
+			buf := new(bytes.Buffer)
+			ast.Fprint(buf, nil, id.Obj.Decl, nil)
+			app.logf("found ident %v, decl =>\n%s", id, buf.String())
+		} else {
+			app.logf("found ident %v, decl is nil", id)
+		}
+	}
+
 	switch fun := node.Fun.(type) {
 	case *ast.Ident:
-		// 呼ばなくていい？
-		return nil
+		if fun.Obj == nil {
+			return nil
+		}
+		if decl, ok := fun.Obj.Decl.(*ast.FuncDecl); !ok {
+			return nil
+		} else {
+			return decl
+		}
 	case *ast.SelectorExpr:
 		functionName := fun.Sel.Name
 		var importName string
@@ -211,6 +231,8 @@ func (app *Application) findFuncDecl(node *ast.CallExpr) *ast.FuncDecl {
 		default:
 			importName = ""
 		}
+		logident(fun.Sel)
+		app.logf("found selector %v.%v", importName, functionName)
 
 		// ファイル -> selector -> import -> packageと辿る
 		file := app.findFile(node)

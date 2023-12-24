@@ -3,6 +3,7 @@ package application_test
 import (
 	"bytes"
 	"fmt"
+	"go/ast"
 	"go/printer"
 	"go/token"
 	"testing"
@@ -21,12 +22,18 @@ func TestApplication(t *testing.T) {
 			return
 		}
 
+		for _, decl := range sut.Decls() {
+			buf := new(bytes.Buffer)
+			ast.Fprint(buf, fset, decl, nil)
+			t.Logf("decl =>\n%s\n", buf.String())
+		}
+
 		decls, err := sut.Dig()
 		if err != nil {
 			t.Fatalf("error on Dig(): %v", err)
 		}
 
-		buf := bytes.NewBuffer([]byte{})
+		buf := new(bytes.Buffer)
 		pcfg := printer.Config{
 			Mode:     printer.TabIndent | printer.SourcePos,
 			Tabwidth: 4,
@@ -36,6 +43,11 @@ func TestApplication(t *testing.T) {
 			fmt.Fprintf(buf, "\n\n")
 		}
 
-		t.Logf("dig =>\n%s", buf.String())
+		t.Logf("dig =>\n%s\n", buf.String())
+		for _, decl := range decls {
+			buf := new(bytes.Buffer)
+			ast.Fprint(buf, fset, decl, nil)
+			t.Logf(buf.String())
+		}
 	})
 }
