@@ -47,7 +47,7 @@ func TestApplication(t *testing.T) {
 		for _, decl := range decls {
 			buf := new(bytes.Buffer)
 			ast.Fprint(buf, fset, decl, nil)
-			t.Logf(buf.String())
+			// t.Logf(buf.String())
 		}
 	})
 }

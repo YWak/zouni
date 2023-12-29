@@ -1,0 +1,3 @@
+- Package単位で type -> []FuncDeclを用意しておく
+- File単位でident -> Package名を用意しておく
+- 

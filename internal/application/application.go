@@ -144,8 +144,16 @@ func (app *Application) Decls() []ast.Decl {
 
 // init関数およびmain関数を起点として、必要な宣言を登場順に返します。
 func (app *Application) Dig() ([]ast.Decl, error) {
+	// テスト用。
+	for i, v := range app.decls {
+		buf := new(bytes.Buffer)
+		ast.Fprint(buf, app.fset, v, nil)
+		app.logf("decl[%d] =>\n%s", i, buf.String())
+	}
 	// 宣言の登場順
 	decls := map[ast.Decl]int{}
+	types := map[*ast.TypeSpec]int{}
+
 	push := func(decl ast.Decl) bool {
 		if _, ex := decls[decl]; ex {
 			return false
@@ -155,7 +163,7 @@ func (app *Application) Dig() ([]ast.Decl, error) {
 	}
 
 	// 起点になる関数
-	roots := []*ast.FuncDecl{}
+	roots := []ast.Decl{}
 
 	// mainを探す
 	for _, decl := range app.pkgs["main"].Decls() {
@@ -184,6 +192,24 @@ func (app *Application) Dig() ([]ast.Decl, error) {
 				}
 
 				// 引数の解析を継続する必要がある
+				return true
+			case *ast.Ident:
+				if node.Obj == nil {
+					return true
+				}
+				switch node.Obj.Kind {
+				case ast.Typ:
+					if node.Obj.Decl == nil {
+						// NOP.
+					} else if tSpec, ok := node.Obj.Decl.(*ast.TypeSpec); !ok {
+						// NOP. it is not TypeSpec
+					} else if _, ex := types[tSpec]; ex {
+						// NOP. it is already handled
+					} else {
+						types[tSpec] = len(types)
+						// TODO この型に関する関数をすべて取得する
+					}
+				}
 				return true
 			default:
 				return true

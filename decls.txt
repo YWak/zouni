@@ -1,0 +1,706 @@
+    support.go:16: decl[0] =>
+             0  *ast.GenDecl { // importは読み取り時には無視しても良い。
+             1  .  Doc: nil
+             2  .  TokPos: main.go:3:1
+             3  .  Tok: import
+             4  .  Lparen: -
+             5  .  Specs: []ast.Spec (len = 1) {
+             6  .  .  0: *ast.ImportSpec {
+             7  .  .  .  Doc: nil
+             8  .  .  .  Name: nil
+             9  .  .  .  Path: *ast.BasicLit {
+            10  .  .  .  .  ValuePos: main.go:3:8
+            11  .  .  .  .  Kind: STRING
+            12  .  .  .  .  Value: "\"example.com/lib\""
+            13  .  .  .  }
+            14  .  .  .  Comment: nil
+            15  .  .  .  EndPos: -
+            16  .  .  }
+            17  .  }
+            18  .  Rparen: -
+            19  }
+    support.go:16: decl[1] =>
+             0  *ast.FuncDecl {
+             1  .  Doc: nil
+             2  .  Recv: nil
+             3  .  Name: *ast.Ident {
+             4  .  .  NamePos: main.go:5:6
+             5  .  .  Name: "indirect"
+             6  .  .  Obj: *ast.Object {
+             7  .  .  .  Kind: func
+             8  .  .  .  Name: "indirect"
+             9  .  .  .  Decl: *(obj @ 0) // 関数定義がネストしているっぽい。
+            10  .  .  .  Data: nil
+            11  .  .  .  Type: nil
+            12  .  .  }
+            13  .  }
+            14  .  Type: *ast.FuncType {
+            15  .  .  Func: main.go:5:1
+            16  .  .  TypeParams: nil
+            17  .  .  Params: *ast.FieldList {
+            18  .  .  .  Opening: main.go:5:14
+            19  .  .  .  List: []*ast.Field (len = 1) {
+            20  .  .  .  .  0: *ast.Field {
+            21  .  .  .  .  .  Doc: nil
+            22  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+            23  .  .  .  .  .  .  0: *ast.Ident {
+            24  .  .  .  .  .  .  .  NamePos: main.go:5:15
+            25  .  .  .  .  .  .  .  Name: "v"
+            26  .  .  .  .  .  .  .  Obj: *ast.Object {
+            27  .  .  .  .  .  .  .  .  Kind: var
+            28  .  .  .  .  .  .  .  .  Name: "v"
+            29  .  .  .  .  .  .  .  .  Decl: *(obj @ 20)
+            30  .  .  .  .  .  .  .  .  Data: nil
+            31  .  .  .  .  .  .  .  .  Type: nil
+            32  .  .  .  .  .  .  .  }
+            33  .  .  .  .  .  .  }
+            34  .  .  .  .  .  }
+            35  .  .  .  .  .  Type: *ast.Ident {
+            36  .  .  .  .  .  .  NamePos: main.go:5:17
+            37  .  .  .  .  .  .  Name: "int"
+            38  .  .  .  .  .  .  Obj: nil
+            39  .  .  .  .  .  }
+            40  .  .  .  .  .  Tag: nil
+            41  .  .  .  .  .  Comment: nil
+            42  .  .  .  .  }
+            43  .  .  .  }
+            44  .  .  .  Closing: main.go:5:20
+            45  .  .  }
+            46  .  .  Results: *ast.FieldList {
+            47  .  .  .  Opening: -
+            48  .  .  .  List: []*ast.Field (len = 1) {
+            49  .  .  .  .  0: *ast.Field {
+            50  .  .  .  .  .  Doc: nil
+            51  .  .  .  .  .  Names: nil
+            52  .  .  .  .  .  Type: *ast.Ident {
+            53  .  .  .  .  .  .  NamePos: main.go:5:22
+            54  .  .  .  .  .  .  Name: "int"
+            55  .  .  .  .  .  .  Obj: nil
+            56  .  .  .  .  .  }
+            57  .  .  .  .  .  Tag: nil
+            58  .  .  .  .  .  Comment: nil
+            59  .  .  .  .  }
+            60  .  .  .  }
+            61  .  .  .  Closing: -
+            62  .  .  }
+            63  .  }
+            64  .  Body: *ast.BlockStmt {
+            65  .  .  Lbrace: main.go:5:26
+            66  .  .  List: []ast.Stmt (len = 1) {
+            67  .  .  .  0: *ast.ReturnStmt {
+            68  .  .  .  .  Return: main.go:6:2
+            69  .  .  .  .  Results: []ast.Expr (len = 1) {
+            70  .  .  .  .  .  0: *ast.Ident {
+            71  .  .  .  .  .  .  NamePos: main.go:6:9
+            72  .  .  .  .  .  .  Name: "v"
+            73  .  .  .  .  .  .  Obj: *(obj @ 26)
+            74  .  .  .  .  .  }
+            75  .  .  .  .  }
+            76  .  .  .  }
+            77  .  .  }
+            78  .  .  Rbrace: main.go:7:1
+            79  .  }
+            80  }
+    support.go:16: decl[2] =>
+             0  *ast.FuncDecl {
+             1  .  Doc: nil
+             2  .  Recv: nil
+             3  .  Name: *ast.Ident {
+             4  .  .  NamePos: main.go:9:6
+             5  .  .  Name: "main"
+             6  .  .  Obj: *ast.Object {
+             7  .  .  .  Kind: func
+             8  .  .  .  Name: "main"
+             9  .  .  .  Decl: *(obj @ 0)
+            10  .  .  .  Data: nil
+            11  .  .  .  Type: nil
+            12  .  .  }
+            13  .  }
+            14  .  Type: *ast.FuncType {
+            15  .  .  Func: main.go:9:1
+            16  .  .  TypeParams: nil
+            17  .  .  Params: *ast.FieldList {
+            18  .  .  .  Opening: main.go:9:10
+            19  .  .  .  List: nil
+            20  .  .  .  Closing: main.go:9:11
+            21  .  .  }
+            22  .  .  Results: nil
+            23  .  }
+            24  .  Body: *ast.BlockStmt {
+            25  .  .  Lbrace: main.go:9:13
+            26  .  .  List: []ast.Stmt (len = 1) {
+            27  .  .  .  0: *ast.ExprStmt {
+            28  .  .  .  .  X: *ast.CallExpr {
+            29  .  .  .  .  .  Fun: *ast.Ident {
+            30  .  .  .  .  .  .  NamePos: main.go:10:2
+            31  .  .  .  .  .  .  Name: "print"
+            32  .  .  .  .  .  .  Obj: nil
+            33  .  .  .  .  .  }
+            34  .  .  .  .  .  Lparen: main.go:10:7
+            35  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+            36  .  .  .  .  .  .  0: *ast.CallExpr {
+            37  .  .  .  .  .  .  .  Fun: *ast.Ident {
+            38  .  .  .  .  .  .  .  .  NamePos: main.go:10:8
+            39  .  .  .  .  .  .  .  .  Name: "indirect"
+            40  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+            41  .  .  .  .  .  .  .  .  .  Kind: func
+            42  .  .  .  .  .  .  .  .  .  Name: "indirect"
+            43  .  .  .  .  .  .  .  .  .  Decl: *ast.FuncDecl {
+            44  .  .  .  .  .  .  .  .  .  .  Doc: nil
+            45  .  .  .  .  .  .  .  .  .  .  Recv: nil
+            46  .  .  .  .  .  .  .  .  .  .  Name: *ast.Ident {
+            47  .  .  .  .  .  .  .  .  .  .  .  NamePos: main.go:5:6
+            48  .  .  .  .  .  .  .  .  .  .  .  Name: "indirect"
+            49  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 40)
+            50  .  .  .  .  .  .  .  .  .  .  }
+            51  .  .  .  .  .  .  .  .  .  .  Type: *ast.FuncType {
+            52  .  .  .  .  .  .  .  .  .  .  .  Func: main.go:5:1
+            53  .  .  .  .  .  .  .  .  .  .  .  TypeParams: nil
+            54  .  .  .  .  .  .  .  .  .  .  .  Params: *ast.FieldList {
+            55  .  .  .  .  .  .  .  .  .  .  .  .  Opening: main.go:5:14
+            56  .  .  .  .  .  .  .  .  .  .  .  .  List: []*ast.Field (len = 1) {
+            57  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Field {
+            58  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Doc: nil
+            59  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+            60  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+            61  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: main.go:5:15
+            62  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "v"
+            63  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *ast.Object {
+            64  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Kind: var
+            65  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "v"
+            66  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Decl: *(obj @ 57)
+            67  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Data: nil
+            68  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Type: nil
+            69  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            70  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            71  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            72  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+            73  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: main.go:5:17
+            74  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "int"
+            75  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            76  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            77  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Tag: nil
+            78  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Comment: nil
+            79  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            80  .  .  .  .  .  .  .  .  .  .  .  .  }
+            81  .  .  .  .  .  .  .  .  .  .  .  .  Closing: main.go:5:20
+            82  .  .  .  .  .  .  .  .  .  .  .  }
+            83  .  .  .  .  .  .  .  .  .  .  .  Results: *ast.FieldList {
+            84  .  .  .  .  .  .  .  .  .  .  .  .  Opening: -
+            85  .  .  .  .  .  .  .  .  .  .  .  .  List: []*ast.Field (len = 1) {
+            86  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Field {
+            87  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Doc: nil
+            88  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Names: nil
+            89  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Type: *ast.Ident {
+            90  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: main.go:5:22
+            91  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "int"
+            92  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            93  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            94  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Tag: nil
+            95  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Comment: nil
+            96  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            97  .  .  .  .  .  .  .  .  .  .  .  .  }
+            98  .  .  .  .  .  .  .  .  .  .  .  .  Closing: -
+            99  .  .  .  .  .  .  .  .  .  .  .  }
+           100  .  .  .  .  .  .  .  .  .  .  }
+           101  .  .  .  .  .  .  .  .  .  .  Body: *ast.BlockStmt {
+           102  .  .  .  .  .  .  .  .  .  .  .  Lbrace: main.go:5:26
+           103  .  .  .  .  .  .  .  .  .  .  .  List: []ast.Stmt (len = 1) {
+           104  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.ReturnStmt {
+           105  .  .  .  .  .  .  .  .  .  .  .  .  .  Return: main.go:6:2
+           106  .  .  .  .  .  .  .  .  .  .  .  .  .  Results: []ast.Expr (len = 1) {
+           107  .  .  .  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Ident {
+           108  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: main.go:6:9
+           109  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "v"
+           110  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 63)
+           111  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+           112  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+           113  .  .  .  .  .  .  .  .  .  .  .  .  }
+           114  .  .  .  .  .  .  .  .  .  .  .  }
+           115  .  .  .  .  .  .  .  .  .  .  .  Rbrace: main.go:7:1
+           116  .  .  .  .  .  .  .  .  .  .  }
+           117  .  .  .  .  .  .  .  .  .  }
+           118  .  .  .  .  .  .  .  .  .  Data: nil
+           119  .  .  .  .  .  .  .  .  .  Type: nil
+           120  .  .  .  .  .  .  .  .  }
+           121  .  .  .  .  .  .  .  }
+           122  .  .  .  .  .  .  .  Lparen: main.go:10:16
+           123  .  .  .  .  .  .  .  Args: []ast.Expr (len = 1) {
+           124  .  .  .  .  .  .  .  .  0: *ast.CallExpr {
+           125  .  .  .  .  .  .  .  .  .  Fun: *ast.SelectorExpr {
+           126  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+           127  .  .  .  .  .  .  .  .  .  .  .  NamePos: main.go:10:17
+           128  .  .  .  .  .  .  .  .  .  .  .  Name: "lib"
+           129  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+           130  .  .  .  .  .  .  .  .  .  .  }
+           131  .  .  .  .  .  .  .  .  .  .  Sel: *ast.Ident {
+           132  .  .  .  .  .  .  .  .  .  .  .  NamePos: main.go:10:21
+           133  .  .  .  .  .  .  .  .  .  .  .  Name: "Add"
+           134  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+           135  .  .  .  .  .  .  .  .  .  .  }
+           136  .  .  .  .  .  .  .  .  .  }
+           137  .  .  .  .  .  .  .  .  .  Lparen: main.go:10:24
+           138  .  .  .  .  .  .  .  .  .  Args: []ast.Expr (len = 2) {
+           139  .  .  .  .  .  .  .  .  .  .  0: *ast.BasicLit {
+           140  .  .  .  .  .  .  .  .  .  .  .  ValuePos: main.go:10:25
+           141  .  .  .  .  .  .  .  .  .  .  .  Kind: INT
+           142  .  .  .  .  .  .  .  .  .  .  .  Value: "1"
+           143  .  .  .  .  .  .  .  .  .  .  }
+           144  .  .  .  .  .  .  .  .  .  .  1: *ast.BasicLit {
+           145  .  .  .  .  .  .  .  .  .  .  .  ValuePos: main.go:10:28
+           146  .  .  .  .  .  .  .  .  .  .  .  Kind: INT
+           147  .  .  .  .  .  .  .  .  .  .  .  Value: "2"
+           148  .  .  .  .  .  .  .  .  .  .  }
+           149  .  .  .  .  .  .  .  .  .  }
+           150  .  .  .  .  .  .  .  .  .  Ellipsis: -
+           151  .  .  .  .  .  .  .  .  .  Rparen: main.go:10:29
+           152  .  .  .  .  .  .  .  .  }
+           153  .  .  .  .  .  .  .  }
+           154  .  .  .  .  .  .  .  Ellipsis: -
+           155  .  .  .  .  .  .  .  Rparen: main.go:10:30
+           156  .  .  .  .  .  .  }
+           157  .  .  .  .  .  }
+           158  .  .  .  .  .  Ellipsis: -
+           159  .  .  .  .  .  Rparen: main.go:10:31
+           160  .  .  .  .  }
+           161  .  .  .  }
+           162  .  .  }
+           163  .  .  Rbrace: main.go:11:1
+           164  .  }
+           165  }
+    support.go:16: decl[3] =>
+             0  *ast.GenDecl {
+             1  .  Doc: nil
+             2  .  TokPos: lib.go:3:1
+             3  .  Tok: type
+             4  .  Lparen: -
+             5  .  Specs: []ast.Spec (len = 1) {
+             6  .  .  0: *ast.TypeSpec { // type はGenDeclの内部で処理される。
+             7  .  .  .  Doc: nil
+             8  .  .  .  Name: *ast.Ident {
+             9  .  .  .  .  NamePos: lib.go:3:6
+            10  .  .  .  .  Name: "Number"
+            11  .  .  .  .  Obj: *ast.Object {
+            12  .  .  .  .  .  Kind: type
+            13  .  .  .  .  .  Name: "Number"
+            14  .  .  .  .  .  Decl: *(obj @ 6)
+            15  .  .  .  .  .  Data: nil
+            16  .  .  .  .  .  Type: nil
+            17  .  .  .  .  }
+            18  .  .  .  }
+            19  .  .  .  TypeParams: nil
+            20  .  .  .  Assign: -
+            21  .  .  .  Type: *ast.InterfaceType {
+            22  .  .  .  .  Interface: lib.go:3:13
+            23  .  .  .  .  Methods: *ast.FieldList {
+            24  .  .  .  .  .  Opening: lib.go:3:23
+            25  .  .  .  .  .  List: []*ast.Field (len = 1) {
+            26  .  .  .  .  .  .  0: *ast.Field {
+            27  .  .  .  .  .  .  .  Doc: nil
+            28  .  .  .  .  .  .  .  Names: nil
+            29  .  .  .  .  .  .  .  Type: *ast.BinaryExpr {
+            30  .  .  .  .  .  .  .  .  X: *ast.BinaryExpr {
+            31  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+            32  .  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:2
+            33  .  .  .  .  .  .  .  .  .  .  Name: "int"
+            34  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            35  .  .  .  .  .  .  .  .  .  }
+            36  .  .  .  .  .  .  .  .  .  OpPos: lib.go:4:6
+            37  .  .  .  .  .  .  .  .  .  Op: |
+            38  .  .  .  .  .  .  .  .  .  Y: *ast.Ident {
+            39  .  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:8
+            40  .  .  .  .  .  .  .  .  .  .  Name: "int32"
+            41  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            42  .  .  .  .  .  .  .  .  .  }
+            43  .  .  .  .  .  .  .  .  }
+            44  .  .  .  .  .  .  .  .  OpPos: lib.go:4:14
+            45  .  .  .  .  .  .  .  .  Op: |
+            46  .  .  .  .  .  .  .  .  Y: *ast.Ident {
+            47  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:16
+            48  .  .  .  .  .  .  .  .  .  Name: "int64"
+            49  .  .  .  .  .  .  .  .  .  Obj: nil
+            50  .  .  .  .  .  .  .  .  }
+            51  .  .  .  .  .  .  .  }
+            52  .  .  .  .  .  .  .  Tag: nil
+            53  .  .  .  .  .  .  .  Comment: nil
+            54  .  .  .  .  .  .  }
+            55  .  .  .  .  .  }
+            56  .  .  .  .  .  Closing: lib.go:5:1
+            57  .  .  .  .  }
+            58  .  .  .  .  Incomplete: false
+            59  .  .  .  }
+            60  .  .  .  Comment: nil
+            61  .  .  }
+            62  .  }
+            63  .  Rparen: -
+            64  }
+    support.go:16: decl[4] =>
+             0  *ast.FuncDecl {
+             1  .  Doc: nil
+             2  .  Recv: nil
+             3  .  Name: *ast.Ident {
+             4  .  .  NamePos: lib.go:7:6
+             5  .  .  Name: "Add"
+             6  .  .  Obj: *ast.Object {
+             7  .  .  .  Kind: func
+             8  .  .  .  Name: "Add"
+             9  .  .  .  Decl: *(obj @ 0)
+            10  .  .  .  Data: nil
+            11  .  .  .  Type: nil
+            12  .  .  }
+            13  .  }
+            14  .  Type: *ast.FuncType {
+            15  .  .  Func: lib.go:7:1
+            16  .  .  TypeParams: *ast.FieldList {
+            17  .  .  .  Opening: lib.go:7:9
+            18  .  .  .  List: []*ast.Field (len = 1) {
+            19  .  .  .  .  0: *ast.Field {
+            20  .  .  .  .  .  Doc: nil
+            21  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+            22  .  .  .  .  .  .  0: *ast.Ident {
+            23  .  .  .  .  .  .  .  NamePos: lib.go:7:10
+            24  .  .  .  .  .  .  .  Name: "V"
+            25  .  .  .  .  .  .  .  Obj: *ast.Object {
+            26  .  .  .  .  .  .  .  .  Kind: type
+            27  .  .  .  .  .  .  .  .  Name: "V"
+            28  .  .  .  .  .  .  .  .  Decl: *(obj @ 19)
+            29  .  .  .  .  .  .  .  .  Data: nil
+            30  .  .  .  .  .  .  .  .  Type: nil
+            31  .  .  .  .  .  .  .  }
+            32  .  .  .  .  .  .  }
+            33  .  .  .  .  .  }
+            34  .  .  .  .  .  Type: *ast.Ident {
+            35  .  .  .  .  .  .  NamePos: lib.go:7:12
+            36  .  .  .  .  .  .  Name: "Number"
+            37  .  .  .  .  .  .  Obj: *ast.Object {
+            38  .  .  .  .  .  .  .  Kind: type
+            39  .  .  .  .  .  .  .  Name: "Number"
+            40  .  .  .  .  .  .  .  Decl: *ast.TypeSpec {
+            41  .  .  .  .  .  .  .  .  Doc: nil
+            42  .  .  .  .  .  .  .  .  Name: *ast.Ident {
+            43  .  .  .  .  .  .  .  .  .  NamePos: lib.go:3:6
+            44  .  .  .  .  .  .  .  .  .  Name: "Number"
+            45  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 37)
+            46  .  .  .  .  .  .  .  .  }
+            47  .  .  .  .  .  .  .  .  TypeParams: nil
+            48  .  .  .  .  .  .  .  .  Assign: -
+            49  .  .  .  .  .  .  .  .  Type: *ast.InterfaceType {
+            50  .  .  .  .  .  .  .  .  .  Interface: lib.go:3:13
+            51  .  .  .  .  .  .  .  .  .  Methods: *ast.FieldList {
+            52  .  .  .  .  .  .  .  .  .  .  Opening: lib.go:3:23
+            53  .  .  .  .  .  .  .  .  .  .  List: []*ast.Field (len = 1) {
+            54  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Field {
+            55  .  .  .  .  .  .  .  .  .  .  .  .  Doc: nil
+            56  .  .  .  .  .  .  .  .  .  .  .  .  Names: nil
+            57  .  .  .  .  .  .  .  .  .  .  .  .  Type: *ast.BinaryExpr {
+            58  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.BinaryExpr {
+            59  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+            60  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:2
+            61  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "int"
+            62  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            63  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            64  .  .  .  .  .  .  .  .  .  .  .  .  .  .  OpPos: lib.go:4:6
+            65  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Op: |
+            66  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Y: *ast.Ident {
+            67  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:8
+            68  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "int32"
+            69  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            70  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            71  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            72  .  .  .  .  .  .  .  .  .  .  .  .  .  OpPos: lib.go:4:14
+            73  .  .  .  .  .  .  .  .  .  .  .  .  .  Op: |
+            74  .  .  .  .  .  .  .  .  .  .  .  .  .  Y: *ast.Ident {
+            75  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:16
+            76  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "int64"
+            77  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            78  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            79  .  .  .  .  .  .  .  .  .  .  .  .  }
+            80  .  .  .  .  .  .  .  .  .  .  .  .  Tag: nil
+            81  .  .  .  .  .  .  .  .  .  .  .  .  Comment: nil
+            82  .  .  .  .  .  .  .  .  .  .  .  }
+            83  .  .  .  .  .  .  .  .  .  .  }
+            84  .  .  .  .  .  .  .  .  .  .  Closing: lib.go:5:1
+            85  .  .  .  .  .  .  .  .  .  }
+            86  .  .  .  .  .  .  .  .  .  Incomplete: false
+            87  .  .  .  .  .  .  .  .  }
+            88  .  .  .  .  .  .  .  .  Comment: nil
+            89  .  .  .  .  .  .  .  }
+            90  .  .  .  .  .  .  .  Data: nil
+            91  .  .  .  .  .  .  .  Type: nil
+            92  .  .  .  .  .  .  }
+            93  .  .  .  .  .  }
+            94  .  .  .  .  .  Tag: nil
+            95  .  .  .  .  .  Comment: nil
+            96  .  .  .  .  }
+            97  .  .  .  }
+            98  .  .  .  Closing: lib.go:7:18
+            99  .  .  }
+           100  .  .  Params: *ast.FieldList {
+           101  .  .  .  Opening: lib.go:7:19
+           102  .  .  .  List: []*ast.Field (len = 1) {
+           103  .  .  .  .  0: *ast.Field {
+           104  .  .  .  .  .  Doc: nil
+           105  .  .  .  .  .  Names: []*ast.Ident (len = 2) {
+           106  .  .  .  .  .  .  0: *ast.Ident {
+           107  .  .  .  .  .  .  .  NamePos: lib.go:7:20
+           108  .  .  .  .  .  .  .  Name: "a"
+           109  .  .  .  .  .  .  .  Obj: *ast.Object {
+           110  .  .  .  .  .  .  .  .  Kind: var
+           111  .  .  .  .  .  .  .  .  Name: "a"
+           112  .  .  .  .  .  .  .  .  Decl: *(obj @ 103)
+           113  .  .  .  .  .  .  .  .  Data: nil
+           114  .  .  .  .  .  .  .  .  Type: nil
+           115  .  .  .  .  .  .  .  }
+           116  .  .  .  .  .  .  }
+           117  .  .  .  .  .  .  1: *ast.Ident {
+           118  .  .  .  .  .  .  .  NamePos: lib.go:7:23
+           119  .  .  .  .  .  .  .  Name: "b"
+           120  .  .  .  .  .  .  .  Obj: *ast.Object {
+           121  .  .  .  .  .  .  .  .  Kind: var
+           122  .  .  .  .  .  .  .  .  Name: "b"
+           123  .  .  .  .  .  .  .  .  Decl: *(obj @ 103)
+           124  .  .  .  .  .  .  .  .  Data: nil
+           125  .  .  .  .  .  .  .  .  Type: nil
+           126  .  .  .  .  .  .  .  }
+           127  .  .  .  .  .  .  }
+           128  .  .  .  .  .  }
+           129  .  .  .  .  .  Type: *ast.Ident {
+           130  .  .  .  .  .  .  NamePos: lib.go:7:25
+           131  .  .  .  .  .  .  Name: "V"
+           132  .  .  .  .  .  .  Obj: *(obj @ 25)
+           133  .  .  .  .  .  }
+           134  .  .  .  .  .  Tag: nil
+           135  .  .  .  .  .  Comment: nil
+           136  .  .  .  .  }
+           137  .  .  .  }
+           138  .  .  .  Closing: lib.go:7:26
+           139  .  .  }
+           140  .  .  Results: *ast.FieldList {
+           141  .  .  .  Opening: -
+           142  .  .  .  List: []*ast.Field (len = 1) {
+           143  .  .  .  .  0: *ast.Field {
+           144  .  .  .  .  .  Doc: nil
+           145  .  .  .  .  .  Names: nil
+           146  .  .  .  .  .  Type: *ast.Ident {
+           147  .  .  .  .  .  .  NamePos: lib.go:7:28
+           148  .  .  .  .  .  .  Name: "V"
+           149  .  .  .  .  .  .  Obj: *(obj @ 25)
+           150  .  .  .  .  .  }
+           151  .  .  .  .  .  Tag: nil
+           152  .  .  .  .  .  Comment: nil
+           153  .  .  .  .  }
+           154  .  .  .  }
+           155  .  .  .  Closing: -
+           156  .  .  }
+           157  .  }
+           158  .  Body: *ast.BlockStmt {
+           159  .  .  Lbrace: lib.go:7:30
+           160  .  .  List: []ast.Stmt (len = 1) {
+           161  .  .  .  0: *ast.ReturnStmt {
+           162  .  .  .  .  Return: lib.go:8:2
+           163  .  .  .  .  Results: []ast.Expr (len = 1) {
+           164  .  .  .  .  .  0: *ast.BinaryExpr {
+           165  .  .  .  .  .  .  X: *ast.Ident {
+           166  .  .  .  .  .  .  .  NamePos: lib.go:8:9
+           167  .  .  .  .  .  .  .  Name: "a"
+           168  .  .  .  .  .  .  .  Obj: *(obj @ 109)
+           169  .  .  .  .  .  .  }
+           170  .  .  .  .  .  .  OpPos: lib.go:8:11
+           171  .  .  .  .  .  .  Op: +
+           172  .  .  .  .  .  .  Y: *ast.Ident {
+           173  .  .  .  .  .  .  .  NamePos: lib.go:8:13
+           174  .  .  .  .  .  .  .  Name: "b"
+           175  .  .  .  .  .  .  .  Obj: *(obj @ 120)
+           176  .  .  .  .  .  .  }
+           177  .  .  .  .  .  }
+           178  .  .  .  .  }
+           179  .  .  .  }
+           180  .  .  }
+           181  .  .  Rbrace: lib.go:9:1
+           182  .  }
+           183  }
+    support.go:16: decl[5] =>
+             0  *ast.FuncDecl {
+             1  .  Doc: nil
+             2  .  Recv: nil
+             3  .  Name: *ast.Ident {
+             4  .  .  NamePos: lib.go:11:6
+             5  .  .  Name: "Sub"
+             6  .  .  Obj: *ast.Object {
+             7  .  .  .  Kind: func
+             8  .  .  .  Name: "Sub"
+             9  .  .  .  Decl: *(obj @ 0)
+            10  .  .  .  Data: nil
+            11  .  .  .  Type: nil
+            12  .  .  }
+            13  .  }
+            14  .  Type: *ast.FuncType {
+            15  .  .  Func: lib.go:11:1
+            16  .  .  TypeParams: *ast.FieldList {
+            17  .  .  .  Opening: lib.go:11:9
+            18  .  .  .  List: []*ast.Field (len = 1) {
+            19  .  .  .  .  0: *ast.Field {
+            20  .  .  .  .  .  Doc: nil
+            21  .  .  .  .  .  Names: []*ast.Ident (len = 1) {
+            22  .  .  .  .  .  .  0: *ast.Ident {
+            23  .  .  .  .  .  .  .  NamePos: lib.go:11:10
+            24  .  .  .  .  .  .  .  Name: "V"
+            25  .  .  .  .  .  .  .  Obj: *ast.Object {
+            26  .  .  .  .  .  .  .  .  Kind: type
+            27  .  .  .  .  .  .  .  .  Name: "V"
+            28  .  .  .  .  .  .  .  .  Decl: *(obj @ 19)
+            29  .  .  .  .  .  .  .  .  Data: nil
+            30  .  .  .  .  .  .  .  .  Type: nil
+            31  .  .  .  .  .  .  .  }
+            32  .  .  .  .  .  .  }
+            33  .  .  .  .  .  }
+            34  .  .  .  .  .  Type: *ast.Ident {
+            35  .  .  .  .  .  .  NamePos: lib.go:11:12
+            36  .  .  .  .  .  .  Name: "Number"
+            37  .  .  .  .  .  .  Obj: *ast.Object {
+            38  .  .  .  .  .  .  .  Kind: type
+            39  .  .  .  .  .  .  .  Name: "Number"
+            40  .  .  .  .  .  .  .  Decl: *ast.TypeSpec {
+            41  .  .  .  .  .  .  .  .  Doc: nil
+            42  .  .  .  .  .  .  .  .  Name: *ast.Ident {
+            43  .  .  .  .  .  .  .  .  .  NamePos: lib.go:3:6
+            44  .  .  .  .  .  .  .  .  .  Name: "Number"
+            45  .  .  .  .  .  .  .  .  .  Obj: *(obj @ 37)
+            46  .  .  .  .  .  .  .  .  }
+            47  .  .  .  .  .  .  .  .  TypeParams: nil
+            48  .  .  .  .  .  .  .  .  Assign: -
+            49  .  .  .  .  .  .  .  .  Type: *ast.InterfaceType {
+            50  .  .  .  .  .  .  .  .  .  Interface: lib.go:3:13
+            51  .  .  .  .  .  .  .  .  .  Methods: *ast.FieldList {
+            52  .  .  .  .  .  .  .  .  .  .  Opening: lib.go:3:23
+            53  .  .  .  .  .  .  .  .  .  .  List: []*ast.Field (len = 1) {
+            54  .  .  .  .  .  .  .  .  .  .  .  0: *ast.Field {
+            55  .  .  .  .  .  .  .  .  .  .  .  .  Doc: nil
+            56  .  .  .  .  .  .  .  .  .  .  .  .  Names: nil
+            57  .  .  .  .  .  .  .  .  .  .  .  .  Type: *ast.BinaryExpr {
+            58  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.BinaryExpr {
+            59  .  .  .  .  .  .  .  .  .  .  .  .  .  .  X: *ast.Ident {
+            60  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:2
+            61  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "int"
+            62  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            63  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            64  .  .  .  .  .  .  .  .  .  .  .  .  .  .  OpPos: lib.go:4:6
+            65  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Op: |
+            66  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Y: *ast.Ident {
+            67  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:8
+            68  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "int32"
+            69  .  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            70  .  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            71  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            72  .  .  .  .  .  .  .  .  .  .  .  .  .  OpPos: lib.go:4:14
+            73  .  .  .  .  .  .  .  .  .  .  .  .  .  Op: |
+            74  .  .  .  .  .  .  .  .  .  .  .  .  .  Y: *ast.Ident {
+            75  .  .  .  .  .  .  .  .  .  .  .  .  .  .  NamePos: lib.go:4:16
+            76  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Name: "int64"
+            77  .  .  .  .  .  .  .  .  .  .  .  .  .  .  Obj: nil
+            78  .  .  .  .  .  .  .  .  .  .  .  .  .  }
+            79  .  .  .  .  .  .  .  .  .  .  .  .  }
+            80  .  .  .  .  .  .  .  .  .  .  .  .  Tag: nil
+            81  .  .  .  .  .  .  .  .  .  .  .  .  Comment: nil
+            82  .  .  .  .  .  .  .  .  .  .  .  }
+            83  .  .  .  .  .  .  .  .  .  .  }
+            84  .  .  .  .  .  .  .  .  .  .  Closing: lib.go:5:1
+            85  .  .  .  .  .  .  .  .  .  }
+            86  .  .  .  .  .  .  .  .  .  Incomplete: false
+            87  .  .  .  .  .  .  .  .  }
+            88  .  .  .  .  .  .  .  .  Comment: nil
+            89  .  .  .  .  .  .  .  }
+            90  .  .  .  .  .  .  .  Data: nil
+            91  .  .  .  .  .  .  .  Type: nil
+            92  .  .  .  .  .  .  }
+            93  .  .  .  .  .  }
+            94  .  .  .  .  .  Tag: nil
+            95  .  .  .  .  .  Comment: nil
+            96  .  .  .  .  }
+            97  .  .  .  }
+            98  .  .  .  Closing: lib.go:11:18
+            99  .  .  }
+           100  .  .  Params: *ast.FieldList {
+           101  .  .  .  Opening: lib.go:11:19
+           102  .  .  .  List: []*ast.Field (len = 1) {
+           103  .  .  .  .  0: *ast.Field {
+           104  .  .  .  .  .  Doc: nil
+           105  .  .  .  .  .  Names: []*ast.Ident (len = 2) {
+           106  .  .  .  .  .  .  0: *ast.Ident {
+           107  .  .  .  .  .  .  .  NamePos: lib.go:11:20
+           108  .  .  .  .  .  .  .  Name: "a"
+           109  .  .  .  .  .  .  .  Obj: *ast.Object {
+           110  .  .  .  .  .  .  .  .  Kind: var
+           111  .  .  .  .  .  .  .  .  Name: "a"
+           112  .  .  .  .  .  .  .  .  Decl: *(obj @ 103)
+           113  .  .  .  .  .  .  .  .  Data: nil
+           114  .  .  .  .  .  .  .  .  Type: nil
+           115  .  .  .  .  .  .  .  }
+           116  .  .  .  .  .  .  }
+           117  .  .  .  .  .  .  1: *ast.Ident {
+           118  .  .  .  .  .  .  .  NamePos: lib.go:11:23
+           119  .  .  .  .  .  .  .  Name: "b"
+           120  .  .  .  .  .  .  .  Obj: *ast.Object {
+           121  .  .  .  .  .  .  .  .  Kind: var
+           122  .  .  .  .  .  .  .  .  Name: "b"
+           123  .  .  .  .  .  .  .  .  Decl: *(obj @ 103)
+           124  .  .  .  .  .  .  .  .  Data: nil
+           125  .  .  .  .  .  .  .  .  Type: nil
+           126  .  .  .  .  .  .  .  }
+           127  .  .  .  .  .  .  }
+           128  .  .  .  .  .  }
+           129  .  .  .  .  .  Type: *ast.Ident {
+           130  .  .  .  .  .  .  NamePos: lib.go:11:25
+           131  .  .  .  .  .  .  Name: "V"
+           132  .  .  .  .  .  .  Obj: *(obj @ 25)
+           133  .  .  .  .  .  }
+           134  .  .  .  .  .  Tag: nil
+           135  .  .  .  .  .  Comment: nil
+           136  .  .  .  .  }
+           137  .  .  .  }
+           138  .  .  .  Closing: lib.go:11:26
+           139  .  .  }
+           140  .  .  Results: *ast.FieldList {
+           141  .  .  .  Opening: -
+           142  .  .  .  List: []*ast.Field (len = 1) {
+           143  .  .  .  .  0: *ast.Field {
+           144  .  .  .  .  .  Doc: nil
+           145  .  .  .  .  .  Names: nil
+           146  .  .  .  .  .  Type: *ast.Ident {
+           147  .  .  .  .  .  .  NamePos: lib.go:11:28
+           148  .  .  .  .  .  .  Name: "V"
+           149  .  .  .  .  .  .  Obj: *(obj @ 25)
+           150  .  .  .  .  .  }
+           151  .  .  .  .  .  Tag: nil
+           152  .  .  .  .  .  Comment: nil
+           153  .  .  .  .  }
+           154  .  .  .  }
+           155  .  .  .  Closing: -
+           156  .  .  }
+           157  .  }
+           158  .  Body: *ast.BlockStmt {
+           159  .  .  Lbrace: lib.go:11:30
+           160  .  .  List: []ast.Stmt (len = 1) {
+           161  .  .  .  0: *ast.ReturnStmt {
+           162  .  .  .  .  Return: lib.go:12:2
+           163  .  .  .  .  Results: []ast.Expr (len = 1) {
+           164  .  .  .  .  .  0: *ast.BinaryExpr {
+           165  .  .  .  .  .  .  X: *ast.Ident {
+           166  .  .  .  .  .  .  .  NamePos: lib.go:12:9
+           167  .  .  .  .  .  .  .  Name: "a"
+           168  .  .  .  .  .  .  .  Obj: *(obj @ 109)
+           169  .  .  .  .  .  .  }
+           170  .  .  .  .  .  .  OpPos: lib.go:12:11
+           171  .  .  .  .  .  .  Op: -
+           172  .  .  .  .  .  .  Y: *ast.Ident {
+           173  .  .  .  .  .  .  .  NamePos: lib.go:12:13
+           174  .  .  .  .  .  .  .  Name: "b"
+           175  .  .  .  .  .  .  .  Obj: *(obj @ 120)
+           176  .  .  .  .  .  .  }
+           177  .  .  .  .  .  }
+           178  .  .  .  .  }
+           179  .  .  .  }
+           180  .  .  }
+           181  .  .  Rbrace: lib.go:13:1
+           182  .  }
+           183  }
